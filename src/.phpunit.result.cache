@@ -1,1 +1,1 @@
-{"version":1,"defects":{"ServerTest::testStatusServer":3},"times":{"ServerTest::testStatusServer":0.03}}
+{"version":1,"defects":{"ServerTest::testStatusServer":3,"UserTest::testCreateUserSuccesfully":3},"times":{"ServerTest::testStatusServer":0.046,"UserTest::testCreateUserSuccesfully":0.12}}
