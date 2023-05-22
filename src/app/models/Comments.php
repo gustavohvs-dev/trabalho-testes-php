@@ -102,6 +102,7 @@ class Comments
             $response = [
                 "status" => 1,
                 "code" => 200,
+                "id" => (int)$conn->lastInsertId(),
                 "info" => "Registro criado com sucesso"
             ];
         }else{

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 22-Maio-2023 às 02:59
+-- Tempo de geração: 22-Maio-2023 às 16:51
 -- Versão do servidor: 10.4.27-MariaDB
 -- versão do PHP: 7.4.33
 
@@ -36,6 +36,13 @@ CREATE TABLE `comments` (
   `updatedAt` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Extraindo dados da tabela `comments`
+--
+
+INSERT INTO `comments` (`id`, `fk_topic`, `fk_user`, `comment`, `createdAt`, `updatedAt`) VALUES
+(1, 1, 1, 'TESTE COMMENT', '2023-05-22 14:51:00', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -50,6 +57,13 @@ CREATE TABLE `topics` (
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
   `updatedAt` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `topics`
+--
+
+INSERT INTO `topics` (`id`, `title`, `description`, `keywords`, `createdAt`, `updatedAt`) VALUES
+(1, 'TOPIC 1', 'TESTE DESCRIPTION', 'TESTE;TESTE2', '2023-05-22 14:50:39', NULL);
 
 -- --------------------------------------------------------
 
@@ -71,9 +85,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `permission`, `createdAt`, `updatedAt`) VALUES
-(1, 'admin', '$2y$10$OYB7Qe02EZvv6S8NeWbqDuUF7bxv2NvHDhNpEFZOe7JC1LPz8Wp0y', 'admin', '2023-05-22 00:49:23', NULL),
-(3, 'Gustavo', '$2y$10$p/IJVCj7k37NTEw34BKmUufiSzi9HUukYfC7WuY.y1w5UUKfkiTJC', 'admin', '2023-05-22 00:56:27', NULL),
-(5, 'gustavo2', '$2y$10$/./nZQgiUiqA1sTHFVOuY.FeVlFdkI4bV2c/4MKMDbOv/.3WPiAoS', 'common', '2023-05-22 00:57:19', NULL);
+(1, 'admin', '$2y$10$OYB7Qe02EZvv6S8NeWbqDuUF7bxv2NvHDhNpEFZOe7JC1LPz8Wp0y', 'admin', '2023-05-22 00:49:23', NULL);
 
 --
 -- Índices para tabelas despejadas
@@ -108,19 +120,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de tabela `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `topics`
 --
 ALTER TABLE `topics`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- Restrições para despejos de tabelas
