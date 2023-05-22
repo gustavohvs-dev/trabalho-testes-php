@@ -5,7 +5,7 @@ use PHPUnit\Framework\TestCase;
 
 include_once "app/models/impetus/ImpetusUtils.php";
 
-class TopicTest extends TestCase
+class CommentTest extends TestCase
 {
     private $http;
     public function setUp(): void
@@ -18,15 +18,15 @@ class TopicTest extends TestCase
         $this->http = null;
     }
 
-    public function testCreateTopicSuccess()
+    public function testCreateCommentSuccess()
     {
         require "config.php";
         $data = [
-            'title' => ImpetusUtils::token(10),
-            'description' => ImpetusUtils::token(10),
-            'keywords' => ImpetusUtils::token(10)
+            'fk_topic' => 1,
+            'fk_user' => 1,
+            'comment' => ImpetusUtils::token(10)
         ];
-        $response = $this->http->post($config['path']."createTopics", [
+        $response = $this->http->post($config['path']."createComments", [
             'headers' => [ 'Authorization' => 'Bearer ' . $config['token'] ],
             'body' => json_encode($data)
         ]);
@@ -36,26 +36,26 @@ class TopicTest extends TestCase
         $body = json_decode($responseJson);
 
         //Cria arquivo cache do usuário
-        $arquivo = fopen("tests/cache/TopicData.json", 'w');
+        $arquivo = fopen("tests/cache/CommentData.json", 'w');
         fwrite($arquivo, $responseJson);
 
     }
 
-    public function testCreateTopicErrorWithoutParams()
+    public function testCreateCommentErrorWithoutParams()
     {
         
         require "config.php";
-        $response = $this->http->post($config['path']."createTopics", [
+        $response = $this->http->post($config['path']."createComments", [
             'headers' => [ 'Authorization' => 'Bearer ' . $config['token'] ],
         ]);
         $this->assertEquals(400, $response->getStatusCode());
     }
 
-    public function testListTopicSuccess()
+    public function testListCommentSuccess()
     {
         
         require "config.php";
-        $response = $this->http->get($config['path']."listTopics", [
+        $response = $this->http->get($config['path']."listComments", [
             'headers' => [ 'Authorization' => 'Bearer ' . $config['token'] ]
         ]);
         $this->assertEquals(200, $response->getStatusCode());
@@ -64,11 +64,11 @@ class TopicTest extends TestCase
         $this->assertEquals(1, $body->status);
     }
 
-    public function testListTopicSuccessWithParams()
+    public function testListCommentSuccessWithParams()
     {
         
         require "config.php";
-        $response = $this->http->get($config['path']."listTopics", [
+        $response = $this->http->get($config['path']."listComments", [
             'headers' => [ 'Authorization' => 'Bearer ' . $config['token'] ],
             'query' => [ 'currentPage' => 1, 'dataPerPage' => 10 ]
         ]);
@@ -78,11 +78,11 @@ class TopicTest extends TestCase
         $this->assertEquals(1, $body->status);
     }
 
-    public function testListTopicErrorNotFound()
+    public function testListCommentErrorNotFound()
     {
         
         require "config.php";
-        $response = $this->http->get($config['path']."listTopics", [
+        $response = $this->http->get($config['path']."listComments", [
             'headers' => [ 'Authorization' => 'Bearer ' . $config['token'] ],
             'query' => [ 'currentPage' => -1, 'dataPerPage' => -1 ]
         ]);
@@ -92,24 +92,24 @@ class TopicTest extends TestCase
         $this->assertEquals(0, $body->status);
     }
 
-    public function testGetTopicSuccess()
+    public function testGetCommentSuccess()
     {
         require "config.php";
-        $topicData = json_decode(file_get_contents("tests/cache/TopicData.json"));
-        $response = $this->http->get($config['path']."getTopics", [
+        $CommentData = json_decode(file_get_contents("tests/cache/CommentData.json"));
+        $response = $this->http->get($config['path']."getComments", [
             'headers' => [ 'Authorization' => 'Bearer ' . $config['token'] ],
-            'query' => [ 'id' => $topicData->id ]
+            'query' => [ 'id' => $CommentData->id ]
         ]);
         $this->assertEquals(200, $response->getStatusCode());
         $body = json_decode($response->getBody()->getContents());
         $this->assertEquals(200, $body->code);
     }
 
-    public function testGetTopicErrorNotFound()
+    public function testGetCommentErrorNotFound()
     {
         require "config.php";
-        $topicData = json_decode(file_get_contents("tests/cache/TopicData.json"));
-        $response = $this->http->get($config['path']."getTopics", [
+        $CommentData = json_decode(file_get_contents("tests/cache/CommentData.json"));
+        $response = $this->http->get($config['path']."getComments", [
             'headers' => [ 'Authorization' => 'Bearer ' . $config['token'] ],
             'query' => [ 'id' => -1]
         ]);
@@ -118,17 +118,17 @@ class TopicTest extends TestCase
         $this->assertEquals(404, $body->code);
     }
 
-    public function testUpdateTopicSuccess()
+    public function testUpdateCommentSuccess()
     {
         require "config.php";
-        $topicData = json_decode(file_get_contents("tests/cache/TopicData.json"));
+        $CommentData = json_decode(file_get_contents("tests/cache/CommentData.json"));
         $data = [
-            'id' => $topicData->id,
-            'title' => ImpetusUtils::token(10),
-            'description' => ImpetusUtils::token(10),
-            'keywords' => ImpetusUtils::token(10)
+            'id' => $CommentData->id,
+            'fk_topic' => 1,
+            'fk_user' => 1,
+            'comment' => ImpetusUtils::token(10)
         ];
-        $response = $this->http->put($config['path']."updateTopics", [
+        $response = $this->http->put($config['path']."updateComments", [
             'headers' => [ 'Authorization' => 'Bearer ' . $config['token'] ],
             'body' => json_encode($data)
         ]);
@@ -138,36 +138,36 @@ class TopicTest extends TestCase
         $this->assertEquals(200, $body->code);
     }
 
-    public function testUpdateTopicErrorWithoutParams()
+    public function testUpdateCommentErrorWithoutParams()
     {
         require "config.php";
-        $topicData = json_decode(file_get_contents("tests/cache/TopicData.json"));
-        $response = $this->http->put($config['path']."updateTopics", [
+        $CommentData = json_decode(file_get_contents("tests/cache/CommentData.json"));
+        $response = $this->http->put($config['path']."updateComments", [
             'headers' => [ 'Authorization' => 'Bearer ' . $config['token'] ]
         ]);
         $this->assertEquals(400, $response->getStatusCode());
     }
 
-    public function testDeleteTopicSuccess()
+    public function testDeleteCommentSuccess()
     {
         require "config.php";
-        $topicData = json_decode(file_get_contents("tests/cache/TopicData.json"));
-        $response = $this->http->delete($config['path']."deleteTopics", [
+        $CommentData = json_decode(file_get_contents("tests/cache/CommentData.json"));
+        $response = $this->http->delete($config['path']."deleteComments", [
             'headers' => [ 'Authorization' => 'Bearer ' . $config['token'] ],
-            'query' => [ 'id' => $topicData->id ]
+            'query' => [ 'id' => $CommentData->id ]
         ]);
         $this->assertEquals(200, $response->getStatusCode());
         $body = json_decode($response->getBody()->getContents());
         $this->assertEquals(200, $body->code);
     }
 
-    public function testDeleteTopicErrorNotFound()
+    public function testDeleteCommentErrorNotFound()
     {
         require "config.php";
-        $topicData = json_decode(file_get_contents("tests/cache/TopicData.json"));
-        $response = $this->http->delete($config['path']."deleteTopics", [
+        $CommentData = json_decode(file_get_contents("tests/cache/CommentData.json"));
+        $response = $this->http->delete($config['path']."deleteComments", [
             'headers' => [ 'Authorization' => 'Bearer ' . $config['token'] ],
-            'query' => [ 'id' => $topicData->id ]
+            'query' => [ 'id' => $CommentData->id ]
         ]);
         $body = json_decode($response->getBody()->getContents());
         $this->assertEquals(404, $body->code);
