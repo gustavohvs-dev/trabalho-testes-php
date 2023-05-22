@@ -3,7 +3,6 @@
 $routes = [
 
 	["login", "app/controllers/login/login.php"],
-	["test", "app/controllers/test/test.php"],
 
     //Users routes
     ["getUsers", "app/controllers/Users/getUsers.php"],
@@ -25,5 +24,12 @@ $routes = [
     ["createComments", "app/controllers/Comments/createComments.php"],
     ["updateComments", "app/controllers/Comments/updateComments.php"],
     ["deleteComments", "app/controllers/Comments/deleteComments.php"],
+
+    //Improvementsuggestions routes
+    ["getImprovementsuggestions", "app/controllers/Improvementsuggestions/getImprovementsuggestions.php"],
+    ["listImprovementsuggestions", "app/controllers/Improvementsuggestions/listImprovementsuggestions.php"],
+    ["createImprovementsuggestions", "app/controllers/Improvementsuggestions/createImprovementsuggestions.php"],
+    ["updateImprovementsuggestions", "app/controllers/Improvementsuggestions/updateImprovementsuggestions.php"],
+    ["deleteImprovementsuggestions", "app/controllers/Improvementsuggestions/deleteImprovementsuggestions.php"],
 
 ];

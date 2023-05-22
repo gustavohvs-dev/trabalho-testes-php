@@ -46,6 +46,19 @@ class Database
         return $table;
     }
 
+    public function improvementSuggestionsTable()
+    {
+        $table = "(
+            id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+            fk_user INT NOT NULL,
+            suggestion TEXT(8000) NOT NULL,
+            createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+            updatedAt DATETIME,
+            FOREIGN KEY (fk_user) REFERENCES users(id)
+            )";
+        return $table;
+    }
+
     /**
      * Adds a first admin user on users table
      */
