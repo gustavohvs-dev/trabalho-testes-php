@@ -1,0 +1,18 @@
+### TUTORIAL DE INSTALAÇÃO
+
+1 - Instale o XAMPP (PHP 7, MYSQL e APACHE) pelo link abaixo
+https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/7.4.33/
+
+2 - Copie todo o SRC para dentro da pasta C://xampp/htdocs
+
+3 - Execute o arquivo XAMPP-CONTROL.EXE e inicie o APACHE e Mysql
+
+4 - Pronto o código pode ser acessado pelo navegador em localhost, você pode acessar o banco de dados pelo navegador em localhost/phpmyadmin
+
+5 - Crie um database com nome 'trabalhotests'
+
+6 - Importe o banco de dados que está nessa pasta (src/readme)
+
+7 - Basta criar os arquivos de teste, para testar utilize o comando "composer test" (caso não tenha o composer, instale-o pelo link abaixo)]
+
+Composer: https://getcomposer.org/download/
