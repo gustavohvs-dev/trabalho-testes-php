@@ -81,7 +81,7 @@ function wsmethod(){
                         ];
                         return (object)$response;
                     }
-					$validate = ImpetusUtils::validator("description", $jsonParams->description, ['type(string)', 'specialChar', 'length()']);
+					$validate = ImpetusUtils::validator("description", $jsonParams->description, ['type(string)', 'specialChar']);
                     if($validate["status"] == 0){
                         $response = [
                             "code" => "400 Bad Request",

@@ -7,7 +7,6 @@ include_once "app/models/impetus/ImpetusUtils.php";
 
 class UserTest extends TestCase
 {
-    //Pendente - automatizar coleta de token e id
     private $http;
     public function setUp(): void
     {
